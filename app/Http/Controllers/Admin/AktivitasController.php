@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aktivitas;
 use App\Models\AnggotaDewan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AktivitasController extends Controller
 {
@@ -46,7 +47,7 @@ class AktivitasController extends Controller
             'kategori'           => 'required|in:' . implode(',', array_keys(Aktivitas::semuaKategori())),
             'lokasi'             => 'required|string|max:255',
             'deskripsi_kegiatan' => 'nullable|string',
-            'dokumentasi_foto'   => 'nullable|image|max:2048',
+            'dokumentasi_foto'   => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         $data['dibuat_oleh'] = auth()->id();
@@ -82,10 +83,14 @@ class AktivitasController extends Controller
             'kategori'           => 'required|in:' . implode(',', array_keys(Aktivitas::semuaKategori())),
             'lokasi'             => 'required|string|max:255',
             'deskripsi_kegiatan' => 'nullable|string',
-            'dokumentasi_foto'   => 'nullable|image|max:2048',
+            'dokumentasi_foto'   => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         if ($request->hasFile('dokumentasi_foto')) {
+            // Delete old photo file if it exists
+            if ($aktivita->dokumentasi_foto && Storage::disk('public')->exists($aktivita->dokumentasi_foto)) {
+                Storage::disk('public')->delete($aktivita->dokumentasi_foto);
+            }
             $data['dokumentasi_foto'] = $request->file('dokumentasi_foto')->store('aktivitas', 'public');
         }
 
@@ -95,6 +100,11 @@ class AktivitasController extends Controller
 
     public function destroy(Aktivitas $aktivita)
     {
+        // Delete associated photo file from storage
+        if ($aktivita->dokumentasi_foto && Storage::disk('public')->exists($aktivita->dokumentasi_foto)) {
+            Storage::disk('public')->delete($aktivita->dokumentasi_foto);
+        }
+
         $aktivita->delete();
         return redirect()->route('admin.aktivitas.index')->with('success', 'Aktivitas berhasil dihapus.');
     }

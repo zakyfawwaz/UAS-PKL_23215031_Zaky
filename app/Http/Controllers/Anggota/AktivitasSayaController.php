@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Anggota;
 use App\Http\Controllers\Controller;
 use App\Models\Aktivitas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AktivitasSayaController extends Controller
 {
@@ -34,7 +35,7 @@ class AktivitasSayaController extends Controller
             'kategori'           => 'required|in:' . implode(',', array_keys(Aktivitas::semuaKategori())),
             'lokasi'             => 'required|string|max:255',
             'deskripsi_kegiatan' => 'nullable|string',
-            'dokumentasi_foto'   => 'nullable|image|max:2048',
+            'dokumentasi_foto'   => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         $data['anggota_dewan_id'] = $this->getAnggotaId();
@@ -70,10 +71,14 @@ class AktivitasSayaController extends Controller
             'kategori'           => 'required|in:' . implode(',', array_keys(Aktivitas::semuaKategori())),
             'lokasi'             => 'required|string|max:255',
             'deskripsi_kegiatan' => 'nullable|string',
-            'dokumentasi_foto'   => 'nullable|image|max:2048',
+            'dokumentasi_foto'   => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         if ($request->hasFile('dokumentasi_foto')) {
+            // Delete old photo file if it exists
+            if ($aktivitas->dokumentasi_foto && Storage::disk('public')->exists($aktivitas->dokumentasi_foto)) {
+                Storage::disk('public')->delete($aktivitas->dokumentasi_foto);
+            }
             $data['dokumentasi_foto'] = $request->file('dokumentasi_foto')->store('aktivitas', 'public');
         }
 
@@ -84,6 +89,12 @@ class AktivitasSayaController extends Controller
     public function destroy(Aktivitas $aktivitas)
     {
         abort_if($aktivitas->anggota_dewan_id !== $this->getAnggotaId(), 403);
+
+        // Delete associated photo file from storage
+        if ($aktivitas->dokumentasi_foto && Storage::disk('public')->exists($aktivitas->dokumentasi_foto)) {
+            Storage::disk('public')->delete($aktivitas->dokumentasi_foto);
+        }
+
         $aktivitas->delete();
         return redirect()->route('anggota.aktivitas.index')->with('success', 'Aktivitas berhasil dihapus.');
     }
