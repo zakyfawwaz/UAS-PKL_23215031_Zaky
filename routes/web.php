@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\RekapController;
+use App\Http\Controllers\Admin\TenagaAhliController;
+use App\Http\Controllers\Admin\StafAdministrasiController;
 use App\Http\Controllers\Anggota\AktivitasSayaController;
 use App\Http\Controllers\Anggota\DashboardController as AnggotaDashboardController;
 use App\Http\Controllers\Anggota\RekapSayaController;
@@ -73,6 +75,12 @@ Route::middleware('auth')->group(function () {
 
         // CRUD Anggota Dewan
         Route::resource('anggota-dewan', AnggotaDewanController::class);
+
+        // CRUD Tenaga Ahli
+        Route::resource('tenaga-ahli', TenagaAhliController::class);
+
+        // CRUD Staf Administrasi
+        Route::resource('staf-administrasi', StafAdministrasiController::class);
 
         // CRUD Aktivitas (semua anggota)
         Route::resource('aktivitas', AktivitasController::class);

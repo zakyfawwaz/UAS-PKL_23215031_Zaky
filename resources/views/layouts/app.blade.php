@@ -152,6 +152,12 @@
                     <a href="{{ route('admin.anggota-dewan.index') }}" class="sidebar-link {{ request()->routeIs('admin.anggota-dewan.*') ? 'active' : '' }}">
                         <i class="bi bi-people-fill"></i> Anggota Dewan
                     </a>
+                    <a href="{{ route('admin.tenaga-ahli.index') }}" class="sidebar-link {{ request()->routeIs('admin.tenaga-ahli.*') ? 'active' : '' }}">
+                        <i class="bi bi-person-badge-fill"></i> Tenaga Ahli
+                    </a>
+                    <a href="{{ route('admin.staf-administrasi.index') }}" class="sidebar-link {{ request()->routeIs('admin.staf-administrasi.*') ? 'active' : '' }}">
+                        <i class="bi bi-person-workspace"></i> Staf Administrasi
+                    </a>
                     <a href="{{ route('admin.aktivitas.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas.*') ? 'active' : '' }}">
                         <i class="bi bi-calendar-event-fill"></i> Aktivitas Harian
                     </a>
