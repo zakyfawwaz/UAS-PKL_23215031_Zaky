@@ -153,13 +153,13 @@
                         <i class="bi bi-people-fill"></i> Anggota Dewan
                     </a>
                     <a href="{{ route('admin.staf-fraksi.index') }}" class="sidebar-link {{ request()->routeIs('admin.staf-fraksi.*') ? 'active' : '' }}">
-                        <i class="bi bi-person-badge-fill"></i> Staf Fraksi
+                        <i class="bi bi-person-badge-fill"></i> TA/SA Fraksi
                     </a>
                     <a href="{{ route('admin.aktivitas-dewan.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas-dewan.*') ? 'active' : '' }}">
                         <i class="bi bi-calendar-event-fill"></i> Aktivitas Dewan
                     </a>
                     <a href="{{ route('admin.aktivitas-staf-fraksi.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas-staf-fraksi.*') ? 'active' : '' }}">
-                        <i class="bi bi-calendar-event-fill"></i> Aktivitas Staf Fraksi
+                        <i class="bi bi-calendar-event-fill"></i> Aktivitas TA/SA Fraksi
                     </a>
 
                     <div class="sidebar-heading">Rekapitulasi</div>

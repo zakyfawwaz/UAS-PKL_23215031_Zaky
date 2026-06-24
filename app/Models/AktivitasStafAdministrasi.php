@@ -32,11 +32,9 @@ class AktivitasStafAdministrasi extends Model
     ];
 
     public const KATEGORI_UMUM = [
-        'administrasi'  => 'Administrasi',
-        'rapat'         => 'Rapat Internal',
-        'pendampingan'  => 'Pendampingan',
-        'lapangan'      => 'Kunjungan Lapangan',
-        'lainnya'       => 'Lainnya',
+        'opd'         => 'OPD',
+        'konstituen'  => 'Konstituen',
+        'dpd_partai'  => 'DPD/Partai',
     ];
 
     public static function semuaKategori(): array

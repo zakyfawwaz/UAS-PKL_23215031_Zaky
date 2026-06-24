@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('aktivitas_tenaga_ahli', function (Blueprint $table) {
-            $table->time('waktu')->after('tanggal')->default('08:00:00');
-            $table->string('kategori')->after('waktu')->default('Lainnya');
-        });
+        if (Schema::hasTable('tenaga_ahli')) {
+            Schema::table('tenaga_ahli', function (Blueprint $table) {
+                $table->time('waktu')->after('jabatan')->default('08:00:00');
+                $table->string('kategori')->after('waktu')->default('Lainnya');
+            });
+        }
 
-        Schema::table('aktivitas_staf_administrasi', function (Blueprint $table) {
-            $table->time('waktu')->after('tanggal')->default('08:00:00');
-            $table->string('kategori')->after('waktu')->default('Lainnya');
-        });
+        if (Schema::hasTable('staf_administrasi')) {
+            Schema::table('staf_administrasi', function (Blueprint $table) {
+                $table->time('waktu')->after('jabatan')->default('08:00:00');
+                $table->string('kategori')->after('waktu')->default('Lainnya');
+            });
+        }
     }
 
     /**
@@ -27,12 +31,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('aktivitas_tenaga_ahli', function (Blueprint $table) {
-            $table->dropColumn(['waktu', 'kategori']);
-        });
+        if (Schema::hasTable('tenaga_ahli') && Schema::hasColumn('tenaga_ahli', 'waktu')) {
+            Schema::table('tenaga_ahli', function (Blueprint $table) {
+                $table->dropColumn(['waktu', 'kategori']);
+            });
+        }
 
-        Schema::table('aktivitas_staf_administrasi', function (Blueprint $table) {
-            $table->dropColumn(['waktu', 'kategori']);
-        });
+        if (Schema::hasTable('staf_administrasi') && Schema::hasColumn('staf_administrasi', 'waktu')) {
+            Schema::table('staf_administrasi', function (Blueprint $table) {
+                $table->dropColumn(['waktu', 'kategori']);
+            });
+        }
     }
 };

@@ -121,7 +121,7 @@ class AktivitasStafFraksiController extends Controller
 
         $parts = explode('-', $data['staf_id']);
         if (count($parts) !== 2) {
-            return back()->withErrors(['staf_id' => 'Staf tidak valid.'])->withInput();
+            return back()->withErrors(['staf_id' => 'TA/SA tidak valid.'])->withInput();
         }
 
         $type = $parts[0];
@@ -151,7 +151,7 @@ class AktivitasStafFraksiController extends Controller
             AktivitasStafAdministrasi::create($insertData);
         }
 
-        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas Staf Fraksi berhasil ditambahkan.');
+        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas TA/SA Fraksi berhasil ditambahkan.');
     }
 
     public function show($type, $id)
@@ -214,7 +214,7 @@ class AktivitasStafFraksiController extends Controller
 
         $parts = explode('-', $data['staf_id']);
         if (count($parts) !== 2) {
-            return back()->withErrors(['staf_id' => 'Staf tidak valid.'])->withInput();
+            return back()->withErrors(['staf_id' => 'TA/SA tidak valid.'])->withInput();
         }
 
         $newType = $parts[0];
@@ -273,7 +273,7 @@ class AktivitasStafFraksiController extends Controller
             $aktivitas->update($updateData);
         }
 
-        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas Staf Fraksi berhasil diperbarui.');
+        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas TA/SA Fraksi berhasil diperbarui.');
     }
 
     public function destroy($type, $id)
@@ -292,6 +292,6 @@ class AktivitasStafFraksiController extends Controller
 
         $aktivitas->delete();
 
-        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas Staf Fraksi berhasil dihapus.');
+        return redirect()->route('admin.aktivitas-staf-fraksi.index')->with('success', 'Aktivitas TA/SA Fraksi berhasil dihapus.');
     }
 }

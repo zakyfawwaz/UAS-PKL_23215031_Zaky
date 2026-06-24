@@ -23,7 +23,6 @@ class TenagaAhli extends Model
      */
     protected $fillable = [
         'nama_lengkap',
-        'jabatan',
         'status',
     ];
 

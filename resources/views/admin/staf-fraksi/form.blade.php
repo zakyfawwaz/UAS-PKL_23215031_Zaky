@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', isset($staf) ? 'Edit Staf Fraksi' : 'Tambah Staf Fraksi')
-@section('page-title', isset($staf) ? 'Edit Staf Fraksi' : 'Tambah Staf Fraksi')
+@section('title', isset($staf) ? 'Edit TA/SA Fraksi' : 'Tambah TA/SA Fraksi')
+@section('page-title', isset($staf) ? 'Edit TA/SA Fraksi' : 'Tambah TA/SA Fraksi')
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-8">
@@ -18,14 +18,9 @@
                             @error('nama_lengkap')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold" style="font-size:.85rem">Jabatan <span class="text-danger">*</span></label>
-                            <input type="text" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" value="{{ old('jabatan', $staf->jabatan ?? '') }}" required>
-                            @error('jabatan')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold" style="font-size:.85rem">Jenis Staf <span class="text-danger">*</span></label>
+                            <label class="form-label fw-semibold" style="font-size:.85rem">Jenis TA/SA <span class="text-danger">*</span></label>
                             <select name="jenis_staf" class="form-select @error('jenis_staf') is-invalid @enderror" required>
-                                <option value="" disabled {{ !isset($staf) ? 'selected' : '' }}>Pilih Jenis Staf</option>
+                                <option value="" disabled {{ !isset($staf) ? 'selected' : '' }}>Pilih Jenis TA/SA</option>
                                 <option value="tenaga_ahli" {{ old('jenis_staf', $staf->jenis_staf ?? '') == 'tenaga_ahli' ? 'selected' : '' }}>Tenaga Ahli</option>
                                 <option value="staf_administrasi" {{ old('jenis_staf', $staf->jenis_staf ?? '') == 'staf_administrasi' ? 'selected' : '' }}>Staf Administrasi</option>
                             </select>

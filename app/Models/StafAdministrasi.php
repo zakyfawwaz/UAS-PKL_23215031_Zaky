@@ -23,7 +23,6 @@ class StafAdministrasi extends Model
      */
     protected $fillable = [
         'nama_lengkap',
-        'jabatan',
         'status',
     ];
 

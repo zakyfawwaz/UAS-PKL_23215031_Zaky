@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', isset($aktivitas) ? 'Edit Aktivitas Staf Fraksi' : 'Tambah Aktivitas Staf Fraksi')
-@section('page-title', isset($aktivitas) ? 'Edit Aktivitas Staf Fraksi' : 'Tambah Aktivitas Staf Fraksi')
+@section('title', isset($aktivitas) ? 'Edit Aktivitas TA/SA Fraksi' : 'Tambah Aktivitas TA/SA Fraksi')
+@section('page-title', isset($aktivitas) ? 'Edit Aktivitas TA/SA Fraksi' : 'Tambah Aktivitas TA/SA Fraksi')
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-8">
@@ -13,9 +13,9 @@
 
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label class="form-label fw-semibold" style="font-size:.85rem">Staf Fraksi <span class="text-danger">*</span></label>
+                            <label class="form-label fw-semibold" style="font-size:.85rem">TA/SA Fraksi <span class="text-danger">*</span></label>
                             <select name="staf_id" class="form-select @error('staf_id') is-invalid @enderror" required>
-                                <option value="">-- Pilih Staf Fraksi --</option>
+                                <option value="">-- Pilih TA/SA --</option>
                                 @foreach($daftarStaf as $staf)
                                     <option value="{{ $staf->key }}" {{ old('staf_id', $aktivitas->staf_id ?? '') == $staf->key ? 'selected' : '' }}>{{ $staf->label }}</option>
                                 @endforeach

@@ -50,7 +50,6 @@ class StafFraksiController extends Controller
     {
         $data = $request->validate([
             'nama_lengkap' => 'required|string|max:100',
-            'jabatan'      => 'required|string|max:100',
             'status'       => 'required|boolean',
             'jenis_staf'   => 'required|in:tenaga_ahli,staf_administrasi',
         ]);
@@ -58,18 +57,16 @@ class StafFraksiController extends Controller
         if ($data['jenis_staf'] === 'tenaga_ahli') {
             TenagaAhli::create([
                 'nama_lengkap' => $data['nama_lengkap'],
-                'jabatan'      => $data['jabatan'],
                 'status'       => $data['status'],
             ]);
         } else {
             StafAdministrasi::create([
                 'nama_lengkap' => $data['nama_lengkap'],
-                'jabatan'      => $data['jabatan'],
                 'status'       => $data['status'],
             ]);
         }
 
-        return redirect()->route('admin.staf-fraksi.index')->with('success', 'Staf Fraksi berhasil ditambahkan.');
+        return redirect()->route('admin.staf-fraksi.index')->with('success', 'TA/SA Fraksi berhasil ditambahkan.');
     }
 
     public function show($type, $id)
@@ -106,7 +103,6 @@ class StafFraksiController extends Controller
 
         $data = $request->validate([
             'nama_lengkap' => 'required|string|max:100',
-            'jabatan'      => 'required|string|max:100',
             'status'       => 'required|boolean',
             'jenis_staf'   => 'required|in:tenaga_ahli,staf_administrasi',
         ]);
@@ -116,13 +112,11 @@ class StafFraksiController extends Controller
             if ($data['jenis_staf'] === 'tenaga_ahli') {
                 TenagaAhli::create([
                     'nama_lengkap' => $data['nama_lengkap'],
-                    'jabatan'      => $data['jabatan'],
                     'status'       => $data['status'],
                 ]);
             } else {
                 StafAdministrasi::create([
                     'nama_lengkap' => $data['nama_lengkap'],
-                    'jabatan'      => $data['jabatan'],
                     'status'       => $data['status'],
                 ]);
             }
@@ -131,12 +125,11 @@ class StafFraksiController extends Controller
             // Update in-place
             $staf->update([
                 'nama_lengkap' => $data['nama_lengkap'],
-                'jabatan'      => $data['jabatan'],
                 'status'       => $data['status'],
             ]);
         }
 
-        return redirect()->route('admin.staf-fraksi.index')->with('success', 'Data Staf Fraksi berhasil diperbarui.');
+        return redirect()->route('admin.staf-fraksi.index')->with('success', 'Data TA/SA Fraksi berhasil diperbarui.');
     }
 
     public function destroy($type, $id)
@@ -151,6 +144,6 @@ class StafFraksiController extends Controller
 
         $staf->delete();
 
-        return redirect()->route('admin.staf-fraksi.index')->with('success', 'Staf Fraksi berhasil dihapus.');
+        return redirect()->route('admin.staf-fraksi.index')->with('success', 'TA/SA Fraksi berhasil dihapus.');
     }
 }
