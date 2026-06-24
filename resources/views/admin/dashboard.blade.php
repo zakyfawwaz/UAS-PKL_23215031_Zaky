@@ -44,7 +44,7 @@
         <div class="card-clean card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <span><i class="bi bi-clock-history text-success me-2"></i>Aktivitas Terbaru</span>
-                <a href="{{ route('admin.aktivitas.index') }}" class="btn btn-sm btn-outline-success" style="font-size:.78rem">Lihat Semua</a>
+                <a href="{{ route('admin.aktivitas-dewan.index') }}" class="btn btn-sm btn-outline-success" style="font-size:.78rem">Lihat Semua</a>
             </div>
             <div class="card-body p-0">
                 @forelse($aktivitasTerbaru as $akt)

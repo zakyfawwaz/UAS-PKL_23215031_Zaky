@@ -1,15 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AnggotaDewanController;
-use App\Http\Controllers\Admin\AktivitasController;
+use App\Http\Controllers\Admin\AktivitasDewanController;
+use App\Http\Controllers\Admin\AktivitasStafFraksiController;
+use App\Http\Controllers\Admin\StafFraksiController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\RekapController;
-use App\Http\Controllers\Admin\TenagaAhliController;
-use App\Http\Controllers\Admin\StafAdministrasiController;
-use App\Http\Controllers\Admin\AktivitasTenagaAhliController;
-use App\Http\Controllers\Admin\AktivitasStafAdministrasiController;
 use App\Http\Controllers\Anggota\AktivitasSayaController;
 use App\Http\Controllers\Anggota\DashboardController as AnggotaDashboardController;
 use App\Http\Controllers\Anggota\RekapSayaController;
@@ -78,16 +76,23 @@ Route::middleware('auth')->group(function () {
         // CRUD Anggota Dewan
         Route::resource('anggota-dewan', AnggotaDewanController::class);
 
-        // CRUD Tenaga Ahli
-        Route::resource('tenaga-ahli', TenagaAhliController::class);
+        // CRUD Staf Fraksi
+        Route::get('staf-fraksi', [StafFraksiController::class, 'index'])->name('staf-fraksi.index');
+        Route::get('staf-fraksi/create', [StafFraksiController::class, 'create'])->name('staf-fraksi.create');
+        Route::post('staf-fraksi', [StafFraksiController::class, 'store'])->name('staf-fraksi.store');
+        Route::get('staf-fraksi/{type}/{id}/edit', [StafFraksiController::class, 'edit'])->name('staf-fraksi.edit');
+        Route::put('staf-fraksi/{type}/{id}', [StafFraksiController::class, 'update'])->name('staf-fraksi.update');
+        Route::delete('staf-fraksi/{type}/{id}', [StafFraksiController::class, 'destroy'])->name('staf-fraksi.destroy');
 
-        // CRUD Staf Administrasi
-        Route::resource('staf-administrasi', StafAdministrasiController::class);
+        // CRUD Aktivitas Dewan & Aktivitas Staf Fraksi
+        Route::resource('aktivitas-dewan', AktivitasDewanController::class);
 
-        // CRUD Aktivitas
-        Route::resource('aktivitas', AktivitasController::class);
-        Route::resource('aktivitas-tenaga-ahli', AktivitasTenagaAhliController::class);
-        Route::resource('aktivitas-staf-administrasi', AktivitasStafAdministrasiController::class);
+        Route::get('aktivitas-staf-fraksi', [AktivitasStafFraksiController::class, 'index'])->name('aktivitas-staf-fraksi.index');
+        Route::get('aktivitas-staf-fraksi/create', [AktivitasStafFraksiController::class, 'create'])->name('aktivitas-staf-fraksi.create');
+        Route::post('aktivitas-staf-fraksi', [AktivitasStafFraksiController::class, 'store'])->name('aktivitas-staf-fraksi.store');
+        Route::get('aktivitas-staf-fraksi/{type}/{id}/edit', [AktivitasStafFraksiController::class, 'edit'])->name('aktivitas-staf-fraksi.edit');
+        Route::put('aktivitas-staf-fraksi/{type}/{id}', [AktivitasStafFraksiController::class, 'update'])->name('aktivitas-staf-fraksi.update');
+        Route::delete('aktivitas-staf-fraksi/{type}/{id}', [AktivitasStafFraksiController::class, 'destroy'])->name('aktivitas-staf-fraksi.destroy');
 
         // Rekap Aktivitas
         Route::prefix('rekap')->name('rekap.')->group(function () {

@@ -1,26 +1,26 @@
 @extends('layouts.app')
-@section('title', isset($aktivitas) ? 'Edit Aktivitas' : 'Tambah Aktivitas')
-@section('page-title', isset($aktivitas) ? 'Edit Aktivitas' : 'Tambah Aktivitas')
+@section('title', isset($aktivitas) ? 'Edit Aktivitas Staf Fraksi' : 'Tambah Aktivitas Staf Fraksi')
+@section('page-title', isset($aktivitas) ? 'Edit Aktivitas Staf Fraksi' : 'Tambah Aktivitas Staf Fraksi')
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card-clean card">
             <div class="card-header"><i class="bi bi-calendar-plus me-2 text-success"></i>{{ isset($aktivitas) ? 'Edit Data' : 'Data Baru' }}</div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ isset($aktivitas) ? route('admin.aktivitas.update', $aktivitas) : route('admin.aktivitas.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ isset($aktivitas) ? route('admin.aktivitas-staf-fraksi.update', ['type' => $aktivitas->pelaku_type, 'id' => $aktivitas->id]) : route('admin.aktivitas-staf-fraksi.store') }}" enctype="multipart/form-data">
                     @csrf
                     @if(isset($aktivitas)) @method('PUT') @endif
 
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label class="form-label fw-semibold" style="font-size:.85rem">Anggota Dewan <span class="text-danger">*</span></label>
-                            <select name="anggota_dewan_id" class="form-select @error('anggota_dewan_id') is-invalid @enderror" required>
-                                <option value="">-- Pilih Anggota --</option>
-                                @foreach($daftarAnggota as $a)
-                                    <option value="{{ $a->id }}" {{ old('anggota_dewan_id', $aktivitas->anggota_dewan_id ?? '') == $a->id ? 'selected' : '' }}>{{ $a->nama_lengkap }}</option>
+                            <label class="form-label fw-semibold" style="font-size:.85rem">Staf Fraksi <span class="text-danger">*</span></label>
+                            <select name="staf_id" class="form-select @error('staf_id') is-invalid @enderror" required>
+                                <option value="">-- Pilih Staf Fraksi --</option>
+                                @foreach($daftarStaf as $staf)
+                                    <option value="{{ $staf->key }}" {{ old('staf_id', $aktivitas->staf_id ?? '') == $staf->key ? 'selected' : '' }}>{{ $staf->label }}</option>
                                 @endforeach
                             </select>
-                            @error('anggota_dewan_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            @error('staf_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold" style="font-size:.85rem">Tanggal <span class="text-danger">*</span></label>
@@ -36,7 +36,7 @@
                             <label class="form-label fw-semibold" style="font-size:.85rem">Kategori <span class="text-danger">*</span></label>
                             <select name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
                                 <option value="">-- Pilih --</option>
-                                @foreach(\App\Models\Aktivitas::kategoriGrouped() as $group => $items)
+                                @foreach(\App\Models\AktivitasTenagaAhli::kategoriGrouped() as $group => $items)
                                     <optgroup label="{{ $group }}">
                                         @foreach($items as $val => $label)
                                             <option value="{{ $val }}" {{ old('kategori', $aktivitas->kategori ?? '') == $val ? 'selected' : '' }}>{{ $label }}</option>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="d-flex gap-2 mt-4">
                         <button type="submit" class="btn btn-success px-4"><i class="bi bi-check-lg me-1"></i>Simpan</button>
-                        <a href="{{ route('admin.aktivitas.index') }}" class="btn btn-outline-secondary">Batal</a>
+                        <a href="{{ route('admin.aktivitas-staf-fraksi.index') }}" class="btn btn-outline-secondary">Batal</a>
                     </div>
                 </form>
             </div>

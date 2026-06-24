@@ -133,7 +133,9 @@
     {{-- Sidebar --}}
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="{{ asset('img/logo-pks.svg') }}" alt="Logo PKS" class="d-block mx-auto mb-3" style="height: 48px; width: auto;">
+            <div class="mx-auto mb-3 d-flex justify-content-center align-items-center" style="width: 72px; height: 72px; background-color: #ffffff; border-radius: 50%;">
+                <img src="{{ asset('img/logo-pks.svg') }}" alt="Logo PKS" style="height: 44px; width: auto;">
+            </div>
             <h5>DPRD Kota Tegal</h5>
             <small>Fraksi PKS — Monitoring</small>
         </div>
@@ -150,14 +152,14 @@
                     <a href="{{ route('admin.anggota-dewan.index') }}" class="sidebar-link {{ request()->routeIs('admin.anggota-dewan.*') ? 'active' : '' }}">
                         <i class="bi bi-people-fill"></i> Anggota Dewan
                     </a>
-                    <a href="{{ route('admin.tenaga-ahli.index') }}" class="sidebar-link {{ request()->routeIs('admin.tenaga-ahli.*') ? 'active' : '' }}">
-                        <i class="bi bi-person-badge-fill"></i> Tenaga Ahli
+                    <a href="{{ route('admin.staf-fraksi.index') }}" class="sidebar-link {{ request()->routeIs('admin.staf-fraksi.*') ? 'active' : '' }}">
+                        <i class="bi bi-person-badge-fill"></i> Staf Fraksi
                     </a>
-                    <a href="{{ route('admin.staf-administrasi.index') }}" class="sidebar-link {{ request()->routeIs('admin.staf-administrasi.*') ? 'active' : '' }}">
-                        <i class="bi bi-person-workspace"></i> Staf Administrasi
+                    <a href="{{ route('admin.aktivitas-dewan.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas-dewan.*') ? 'active' : '' }}">
+                        <i class="bi bi-calendar-event-fill"></i> Aktivitas Dewan
                     </a>
-                    <a href="{{ route('admin.aktivitas.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas.*') ? 'active' : '' }}">
-                        <i class="bi bi-calendar-event-fill"></i> Aktivitas Harian
+                    <a href="{{ route('admin.aktivitas-staf-fraksi.index') }}" class="sidebar-link {{ request()->routeIs('admin.aktivitas-staf-fraksi.*') ? 'active' : '' }}">
+                        <i class="bi bi-calendar-event-fill"></i> Aktivitas Staf Fraksi
                     </a>
 
                     <div class="sidebar-heading">Rekapitulasi</div>

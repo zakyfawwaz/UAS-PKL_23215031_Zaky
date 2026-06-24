@@ -8,7 +8,7 @@ use App\Models\AnggotaDewan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AktivitasController extends Controller
+class AktivitasDewanController extends Controller
 {
     public function index(Request $request)
     {
@@ -24,15 +24,15 @@ class AktivitasController extends Controller
             $query->milikAnggota($request->anggota);
         }
 
-        return view('admin.aktivitas.index', [
-            'aktivitas'     => $query->get(),
+        return view('admin.aktivitas-dewan.index', [
+            'aktivitas'     => $query->paginate(15),
             'daftarAnggota' => AnggotaDewan::aktif()->orderBy('nama_lengkap')->get(),
         ]);
     }
 
     public function create()
     {
-        return view('admin.aktivitas.form', [
+        return view('admin.aktivitas-dewan.form', [
             'daftarAnggota' => AnggotaDewan::aktif()->orderBy('nama_lengkap')->get(),
         ]);
     }
@@ -57,23 +57,23 @@ class AktivitasController extends Controller
         }
 
         Aktivitas::create($data);
-        return redirect()->route('admin.aktivitas.index')->with('success', 'Aktivitas berhasil ditambahkan.');
+        return redirect()->route('admin.aktivitas-dewan.index')->with('success', 'Aktivitas Dewan berhasil ditambahkan.');
     }
 
-    public function show(Aktivitas $aktivita)
+    public function show(Aktivitas $aktivitas_dewan)
     {
-        return redirect()->route('admin.aktivitas.edit', $aktivita);
+        return redirect()->route('admin.aktivitas-dewan.edit', $aktivitas_dewan);
     }
 
-    public function edit(Aktivitas $aktivita)
+    public function edit(Aktivitas $aktivitas_dewan)
     {
-        return view('admin.aktivitas.form', [
-            'aktivitas'     => $aktivita,
+        return view('admin.aktivitas-dewan.form', [
+            'aktivitas'     => $aktivitas_dewan,
             'daftarAnggota' => AnggotaDewan::aktif()->orderBy('nama_lengkap')->get(),
         ]);
     }
 
-    public function update(Request $request, Aktivitas $aktivita)
+    public function update(Request $request, Aktivitas $aktivitas_dewan)
     {
         $data = $request->validate([
             'anggota_dewan_id'   => 'required|exists:anggota_dewans,id',
@@ -87,25 +87,23 @@ class AktivitasController extends Controller
         ]);
 
         if ($request->hasFile('dokumentasi_foto')) {
-            // Delete old photo file if it exists
-            if ($aktivita->dokumentasi_foto && Storage::disk('public')->exists($aktivita->dokumentasi_foto)) {
-                Storage::disk('public')->delete($aktivita->dokumentasi_foto);
+            if ($aktivitas_dewan->dokumentasi_foto && Storage::disk('public')->exists($aktivitas_dewan->dokumentasi_foto)) {
+                Storage::disk('public')->delete($aktivitas_dewan->dokumentasi_foto);
             }
             $data['dokumentasi_foto'] = $request->file('dokumentasi_foto')->store('aktivitas', 'public');
         }
 
-        $aktivita->update($data);
-        return redirect()->route('admin.aktivitas.index')->with('success', 'Aktivitas berhasil diperbarui.');
+        $aktivitas_dewan->update($data);
+        return redirect()->route('admin.aktivitas-dewan.index')->with('success', 'Aktivitas Dewan berhasil diperbarui.');
     }
 
-    public function destroy(Aktivitas $aktivita)
+    public function destroy(Aktivitas $aktivitas_dewan)
     {
-        // Delete associated photo file from storage
-        if ($aktivita->dokumentasi_foto && Storage::disk('public')->exists($aktivita->dokumentasi_foto)) {
-            Storage::disk('public')->delete($aktivita->dokumentasi_foto);
+        if ($aktivitas_dewan->dokumentasi_foto && Storage::disk('public')->exists($aktivitas_dewan->dokumentasi_foto)) {
+            Storage::disk('public')->delete($aktivitas_dewan->dokumentasi_foto);
         }
 
-        $aktivita->delete();
-        return redirect()->route('admin.aktivitas.index')->with('success', 'Aktivitas berhasil dihapus.');
+        $aktivitas_dewan->delete();
+        return redirect()->route('admin.aktivitas-dewan.index')->with('success', 'Aktivitas Dewan berhasil dihapus.');
     }
 }
