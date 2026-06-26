@@ -16,7 +16,7 @@
         @media print { body { margin: 1cm; } }
     </style>
 </head>
-<body onload="window.print()">
+<body>
     <div class="kop">
         <h2>DPRD KOTA TEGAL</h2>
         <p>FRAKSI PARTAI KEADILAN SEJAHTERA (PKS)</p>

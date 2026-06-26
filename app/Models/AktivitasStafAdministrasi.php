@@ -34,7 +34,7 @@ class AktivitasStafAdministrasi extends Model
     public const KATEGORI_UMUM = [
         'opd'         => 'OPD',
         'konstituen'  => 'Konstituen',
-        'dpd_partai'  => 'DPD/Partai',
+        'Fraksi'  => 'Fraksi',
     ];
 
     public static function semuaKategori(): array

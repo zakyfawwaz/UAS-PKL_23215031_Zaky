@@ -96,12 +96,14 @@ class LaporanController extends Controller
     public function cetak(Request $request)
     {
         $data = $this->getLaporanData($request);
+        $data['pdf'] = false;
         return view('admin.laporan.cetak', $data);
     }
 
     public function exportPdf(Request $request)
     {
         $data = $this->getLaporanData($request);
+        $data['pdf'] = true;
         
         $pdf = Pdf::loadView('admin.laporan.cetak', $data);
         
